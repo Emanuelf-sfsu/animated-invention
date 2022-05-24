@@ -21,7 +21,14 @@ function love.load()
     --     resizable = false,
     --     vsync = true
     -- })
-    love.graphics.setDefaultFilter('nearest', 'nearest')
+    love.graphics.setDefaultFilter('nearest' ,'nearest')
+
+    -- font to better replicate the retro version of pong
+    smallFont = love.graphics.newFont('font.ttf', 8)
+
+    -- set LOVE2D to active font
+    love.graphics.setFont(smallFont)
+
     -- Will instead use the push libary 
     push:setupScreen(VIRTUAL_WIDTH,VIRTUAL_HEIGHT,WINDOW_WIDTH,WINDOW_HEIGHT,{
         fullscreen = false,
@@ -41,8 +48,19 @@ function love.draw()
     -- begin rendering at virtual resolution
     push:apply('start')
 
+    -- clear the screen with specific color
+    love.graphics.clear(40/255, 45/255, 52/255, 255/255)    
+    -- welcome screen
+    love.graphics.printf('Hello Pong!', 0, 20, VIRTUAL_WIDTH, 'center')
+    
+    -- render first paddle (left)
+    love.graphics.rectangle('fill', 10, 30, 5, 20)
 
-    love.graphics.printf('Hello Pong!', 0, VIRTUAL_HEIGHT / 2 - 6, VIRTUAL_WIDTH, 'center')
+    -- render second paddle (right)
+    love.graphics.rectangle('fill',VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 50, 5, 20)
+
+    -- render ball (center)
+    love.graphics.rectangle('fill', VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4 )
 
     -- end rendering at virtual resolution
     push:apply('end')
