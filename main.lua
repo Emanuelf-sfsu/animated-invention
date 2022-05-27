@@ -19,12 +19,12 @@ PADDLE_SPEED = 200
 
 -- Runs During games startup
 function love.load()
-    -- love.window.setMode(WINDOW_WIDTH,WINDOW_HEIGHT,{
-    --     fullscreen = false,
-    --     resizable = false,
-    --     vsync = true
-    -- })
+
     love.graphics.setDefaultFilter('nearest' ,'nearest')
+
+    -- seed the RNG so that calls to random are always random
+    -- using the time because it will always be different
+    math.randomseed(os.time())
 
     -- font to better replicate the retro version of pong
     smallFont = love.graphics.newFont('font.ttf', 8)
@@ -49,27 +49,48 @@ function love.load()
     -- paddle positions on the Y axis (they can only move up or down)
     player1Y = 30
     player2Y = VIRTUAL_HEIGHT - 50
+
+    -- velocity and position variables for the ball
+    ballX = VIRTUAL_WIDTH / 2 - 2
+    ballY = VIRTUAL_HEIGHT / 2 - 2
+
+    ballDX = math.random(2) == 1 and 100 or -100
+    ballDY = math.random(-50,50)
+
+    -- game state variable used to transition from different parts of 
+    -- the game
+    gameState = 'start'
 end
 
 function love.update(dt)
     -- player1 movement
     if love.keyboard.isDown('w') then
-        -- add negative paddle speed  
-        player1Y = player1Y + -PADDLE_SPEED * dt
+        -- add negative paddle speed 
+        -- math.max returns the greater of 2 values
+        -- bottom of the edge minus paddle height so player1 won't go above it
+        player1Y = math.max(0, player1Y + -PADDLE_SPEED * dt)
 
     elseif love.keyboard.isDown('s') then
-        -- add positive 
-        player1Y = player1Y + PADDLE_SPEED * dt
+        -- add positive  paddle speed 
+        -- math.min finds the lesser of 2 values
+        player1Y = math.min(VIRTUAL_HEIGHT - 20,player1Y + PADDLE_SPEED * dt)
     end
 
     -- player 2 movement
     if love.keyboard.isDown('up') then
         -- add negative paddle speed  
-        player2Y = player2Y + -PADDLE_SPEED * dt
+        player2Y =  math.max(0, player2Y + -PADDLE_SPEED * dt)
         
     elseif love.keyboard.isDown('down') then
         -- add positive 
-        player2Y = player2Y + PADDLE_SPEED * dt
+        player2Y =  math.min(VIRTUAL_HEIGHT - 20, player2Y + PADDLE_SPEED * dt)
+
+    end
+
+    -- updating ball depending on DX and DY only if we are in play state
+    if gameState == ballX + ballDX *dt
+        ballX = ballX + ballDX * dt
+        ballY = ballY + ballDY * dt
     end
 end
 
