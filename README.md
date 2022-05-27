@@ -17,7 +17,7 @@ These are the major updates which are required to make the game. Each update is 
 13. Audio
 14. bfxr
 ### Resources
-- [LÖVE2D](https://love2d.org/): LÖVE is an *awesome* framework you can use to make 2D games in Lua.
-- Push library https://github.com/Ulydev/push
+- [LÖVE2D](https://love2d.org/) is an *awesome* framework you can use to make 2D games in Lua.
+- [Push](https://github.com/Ulydev/push) library to help you to focus on making your game with a fixed resolution. 
 
 
