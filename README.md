@@ -16,7 +16,8 @@ These are the major updates which are required to make the game. Each update is 
 12. Victory
 13. Audio
 14. bfxr
-### Requirements
+### Resources
 - [LÖVE2D](https://love2d.org/): LÖVE is an *awesome* framework you can use to make 2D games in Lua.
+- Push library https://github.com/Ulydev/push
 
 
