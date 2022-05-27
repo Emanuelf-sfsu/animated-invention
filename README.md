@@ -1,4 +1,5 @@
 # animated-invention
+![](https://user-images.githubusercontent.com/70411130/170773187-ba2477c1-d837-40a3-a2f1-ae1147f48a32.png)
 In this project, I am recreating the famous arcade game Pong using LÖVE2D and the Harvard University's CS50 course lecture. 
 
 These are the major updates which are required to make the game. Each update is saved in the repo as a branch to keep track of the steps. The green check marks indicate which steps are completed. 
